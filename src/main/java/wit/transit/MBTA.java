@@ -1,4 +1,4 @@
-package transit;
+package wit.transit;
 
 
 import com.fasterxml.jackson.databind.JsonNode;

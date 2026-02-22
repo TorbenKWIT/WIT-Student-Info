@@ -1,4 +1,6 @@
-import transit.MBTA;
+package wit;
+
+import wit.transit.MBTA;
 
 import java.util.Scanner;
 

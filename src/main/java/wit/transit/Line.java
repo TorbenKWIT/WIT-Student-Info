@@ -1,4 +1,4 @@
-package transit;
+package wit.transit;
 
 public class Line {
     String id;
