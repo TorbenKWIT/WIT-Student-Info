@@ -9,10 +9,16 @@ public class Stop {
         this.name = name;
     }
 
+    /**
+     * @return id of stop
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * @return name of stop
+     */
     public String getName(){
         return name;
     }
