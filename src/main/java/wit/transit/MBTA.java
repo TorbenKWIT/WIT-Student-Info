@@ -30,7 +30,7 @@ public class MBTA{
     }
 
     /**
-     * @param apiKey
+     * @param apiKey set the api key for mbta api
      */
     public void setApiKey(String apiKey){
         this.apiKey = apiKey;
@@ -50,10 +50,10 @@ public class MBTA{
      * @param to
      * @return
      */
-//    public ArrayList<Stop> getAllStopsReachable(Stop from,Stop to){
-//
-//        return new Stop[0];
-//    }
+    public ArrayList<Stop> getAllStopsReachable(Stop from,Stop to){
+
+        return new Stop[0];
+    }
 
     /**
      * @param from
