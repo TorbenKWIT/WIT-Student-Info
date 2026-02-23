@@ -51,8 +51,9 @@ public class MBTA{
      * @return
      */
     public ArrayList<Stop> getAllStopsReachable(Stop from,Stop to){
+        // TODO
 
-        return new Stop[0];
+        return null;
     }
 
     /**
@@ -60,10 +61,11 @@ public class MBTA{
      * @param to
      * @return
      */
-//    public ArrayList<TrainArrival> getTrainArrivals(Stop from, Stop to){
-//
-//        return new TrainArrival[0];
-//    }
+    public ArrayList<TrainArrival> getTrainArrivals(Stop from, Stop to){
+        // TODO
+
+        return null;
+    }
 
     /**
      * pulls data from the MBTA API
