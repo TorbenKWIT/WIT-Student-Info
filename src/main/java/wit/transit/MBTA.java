@@ -16,17 +16,21 @@ import java.util.HashMap;
  * Backend class for calling the MBTA API and formats the data into objects to be used in the UI elements
  */
 public class MBTA{
-    HashMap<String, Line> lines;
+    HashMap<String, Trip> trips;
     HashMap<String, Stop> stops;
     HashMap<String, TrainArrival> trainArrivals;
+    HashMap<String, Train> trains;
+    HashMap<String, Route> routes;
     String apiKey;
 
 
     public MBTA(){
         apiKey = "";
-        lines = new HashMap<>();
+        trips = new HashMap<>();
         stops = new HashMap<>();
         trainArrivals = new HashMap<>();
+        trains = new HashMap<>();
+        routes = new HashMap<>();
     }
 
     /**
@@ -72,6 +76,13 @@ public class MBTA{
      */
     public void pullData(){
         mapRoutes(httpRequest("https://api-v3.mbta.com/routes?type=0", apiKey));
+        mapTrips(httpRequest("https://api-v3.mbta.com/trips?filter[route]=Green-B", apiKey));
+        mapTrips(httpRequest("https://api-v3.mbta.com/trips?filter[route]=Green-C", apiKey));
+        mapTrips(httpRequest("https://api-v3.mbta.com/trips?filter[route]=Green-D", apiKey));
+        mapTrips(httpRequest("https://api-v3.mbta.com/trips?filter[route]=Green-E", apiKey));
+
+
+
         System.out.println("Request Made");
     }
 
@@ -86,6 +97,22 @@ public class MBTA{
         }
     }
 
+    private void addTrip(String id, Trip trip){
+        trips.put(id, trip);
+    }
+
+    private void mapTrips(JsonNode data){
+        for (JsonNode node : data){
+            String id = node.get("id").asText(); //Extract id
+            String name = node.get("attributes").get("headsign").asText(); //extarct name
+            String direction = node.get("attributes").get("direction_id").asText();
+            String route = node.get("relationships").get("route").get("data").get("id").asText();
+            addTrip(id, new Trip(id, name, direction, routes.get(route)));
+            System.out.printf("%s %s%n", id, name);
+
+        }
+    }
+
     /**
      * maps the json data to route object
      * and calls mapStops to map the stops on the route
@@ -96,7 +123,8 @@ public class MBTA{
             String id = node.get("id").asText(); //Extract id
             String name = node.get("attributes").get("long_name").asText(); //extarct name
             if(!id.equals("Mattapan")){
-                new Route(id, name);
+
+                routes.put(id, new Route(id, name));
                 mapStops(httpRequest("https://api-v3.mbta.com/stops?filter[route]="+id, apiKey));
                 System.out.printf("%s %s%n", id, name);
             }
