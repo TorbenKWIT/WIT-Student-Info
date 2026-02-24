@@ -7,6 +7,11 @@ public class Line {
     String id;
     String name;
 
+    Line(String id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
     /**
      * @return the line id as a String
      */

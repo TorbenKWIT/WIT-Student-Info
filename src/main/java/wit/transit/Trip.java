@@ -6,8 +6,15 @@ package wit.transit;
 public class Trip {
     String id;
     String name;
-    Line line;
+    String direction;
+    Route route;
 
+    Trip(String id, String name, String direction, Route route){
+        this.id=id;
+        this.name=name;
+        this.direction=direction;
+        this.route=route;
+    }
     /**
      * @return id as a String
      */
@@ -22,10 +29,11 @@ public class Trip {
         return name;
     }
 
+    public String getDirection(){ return direction; }
     /**
-     * @return which line a trip is taking as a Line object
+     * @return which Route a trip is taking as a route object
      */
-    public Line getLine(){
-        return line;
+    public Route getLine(){
+        return route;
     }
 }
