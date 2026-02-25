@@ -1,14 +1,40 @@
 package wit.transit;
 
+import java.util.ArrayList;
+
 public class TrainArrival {
-    DateTime[] arrival_times;
+    String arrivalTimes;
+    String departureTimes;
+    String direction;
     String id;
+
+    TrainArrival(String arrivalTimes, String departureTimes, String direction, String id){
+        this.arrivalTimes=arrivalTimes;
+        this.departureTimes=departureTimes;
+        this.direction = direction;
+        this.id=id;
+    }
+
 
     /**
      * @return List arrival times in the form of a list of DateTime Objects
      */
-    public DateTime[] getArrivalTimes() {
-        return arrival_times;
+    public String getArrivalTime() {
+        return arrivalTimes;
+    }
+
+    /**
+     * @return
+     */
+    public String getDepartureTimes(){
+        return departureTimes;
+    }
+
+    /**
+     * @return
+     */
+    public String getDirection(){
+        return direction;
     }
 
     /**
