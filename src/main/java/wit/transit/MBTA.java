@@ -18,7 +18,8 @@ import java.util.HashMap;
 public class MBTA{
     HashMap<String, Trip> trips;
     HashMap<String, Stop> stops;
-    HashMap<String, TrainArrival> trainArrivals;
+    ArrayList<TrainArrival> trainArrivals;
+    ArrayList<Stop> stopsOnArrival;
     HashMap<String, Train> trains;
     HashMap<String, Route> routes;
     String apiKey;
@@ -28,9 +29,10 @@ public class MBTA{
         apiKey = "";
         trips = new HashMap<>();
         stops = new HashMap<>();
-        trainArrivals = new HashMap<>();
+        trainArrivals = new ArrayList<>();
         trains = new HashMap<>();
         routes = new HashMap<>();
+        stopsOnArrival = new ArrayList<>();
     }
 
     /**
@@ -43,32 +45,35 @@ public class MBTA{
     /**
      * @return arrayList with all of the Stops
      */
-    public ArrayList<Stop> getAllStops(){
-        ArrayList<Stop> stopsArray = new ArrayList<>() ;
-        stopsArray.addAll(stops.values());
-        return stopsArray;
+    public HashMap<String, Stop> getAllStops(){
+        return stops;
     }
 
     /**
-     * @param from
-     * @param to
-     * @return
+     * @return hash map of all the routes
      */
-    public ArrayList<Stop> getAllStopsReachable(Stop from,Stop to){
-        // TODO
+    public HashMap<String, Route> getAllRoutes(){
+        return routes;
+    }
 
-        return null;
+
+    /**
+     * @param route
+     * @return Array List of the stops reachable by the Route
+     */
+    public ArrayList<Stop> getStopsReachable(Route route){
+        return route.getStopsOnRoute();
     }
 
     /**
-     * @param from
-     * @param to
+     * @param stop The Train station you are departing from
+     * @param route Route Object of the train route you are taking
      * @return
      */
-    public ArrayList<TrainArrival> getTrainArrivals(Stop from, Stop to){
-        // TODO
-
-        return null;
+    public ArrayList<TrainArrival> getTrainArrivals(Stop stop, Route route){
+        clearStoredArrivals();
+        mapTrainArrivals(httpRequest("https://api-v3.mbta.com/predictions?stop="+ stop.getId() + "&route=" + route.getId(), apiKey));
+        return trainArrivals;
     }
 
     /**
@@ -101,12 +106,33 @@ public class MBTA{
         trips.put(id, trip);
     }
 
+    private void clearStoredArrivals(){
+        trainArrivals.clear();
+    }
+
+    private void addArrival(TrainArrival arrival){
+        trainArrivals.add(arrival);
+    }
+
+    private void mapTrainArrivals(JsonNode data){
+        for (JsonNode node :data){
+            String id = node.get("id").asText();
+            String arrivalTime = node.get("attributes").get("arrival_time").asText();
+            String departureTime = node.get("attributes").get("departure_time").asText();
+            String direction = node.get("attributes").get("direction_id").asText();
+            addArrival(new TrainArrival(arrivalTime, departureTime, direction, id));
+
+        }
+
+    }
+
     private void mapTrips(JsonNode data){
         for (JsonNode node : data){
             String id = node.get("id").asText(); //Extract id
             String name = node.get("attributes").get("headsign").asText(); //extarct name
             String direction = node.get("attributes").get("direction_id").asText();
             String route = node.get("relationships").get("route").get("data").get("id").asText();
+
             addTrip(id, new Trip(id, name, direction, routes.get(route)));
             System.out.printf("%s %s%n", id, name);
 
@@ -123,10 +149,10 @@ public class MBTA{
             String id = node.get("id").asText(); //Extract id
             String name = node.get("attributes").get("long_name").asText(); //extarct name
             if(!id.equals("Mattapan")){
-
+                mapStops(httpRequest("https://api-v3.mbta.com/stops?filter[route]="+id, apiKey), id);
                 routes.put(id, new Route(id, name));
-                mapStops(httpRequest("https://api-v3.mbta.com/stops?filter[route]="+id, apiKey));
                 System.out.printf("%s %s%n", id, name);
+
             }
 
         }
@@ -137,17 +163,21 @@ public class MBTA{
      * maps the stop data from the json to stop objects and adds them to the hashmap
      * @param dataArray Json Data from the http request
      */
-    private void mapStops(JsonNode dataArray){
+    private void mapStops(JsonNode dataArray, String routeId){
         for (JsonNode node : dataArray) {
             // 2. Extract "id" (direct child of element)
             String id = node.get("id").asText();
 
             // 3. Extract "name" (inside the "attributes" object)
             String name = node.get("attributes").get("name").asText();
+
             System.out.printf("%s %s%n", id, name);
 
             addStop(id, new Stop(id, name));
+            routes.get(routeId).addStopToRoute(stops.get(id));
+
         }
+
     }
 
     /**
