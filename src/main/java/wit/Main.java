@@ -1,12 +1,6 @@
 package wit;
 
 import wit.transit.MBTA;
-import wit.transit.Stop;
-import wit.transit.Train;
-import wit.transit.TrainArrival;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -20,12 +14,13 @@ public class Main {
         MBTA mbta = new MBTA();
         mbta.setApiKey(apiKey);
         mbta.pullData();
-        HashMap<String, Stop> stops = mbta.getAllStops();
-        ArrayList<TrainArrival> arrivals = mbta.getTrainArrivals(stops.get("place-tapst"), mbta.getAllRoutes().get("Green-C"));;
-        System.out.println(arrivals.get(1).getArrivalTime());
 
 
-        System.out.println(mbta.getAllStops());
+
+
+
+
+        //System.out.println(mbta.getAllStops());
 
 
     }
