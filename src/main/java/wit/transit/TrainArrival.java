@@ -2,6 +2,12 @@ package wit.transit;
 
 import java.util.ArrayList;
 
+/**
+ * Train Arrival Class
+ * arrival Time
+ * Departure time
+ * direction 1=
+ */
 public class TrainArrival {
     String arrivalTimes;
     String departureTimes;

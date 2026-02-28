@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Backend class for calling the MBTA API and formats the data into objects to be used in the UI elements
+ * The main backend class for calling the MBTA API and formats the data into objects to be used in the UI elements
  */
 public class MBTA{
     HashMap<String, Trip> trips;
@@ -36,21 +36,21 @@ public class MBTA{
     }
 
     /**
-     * @param apiKey set the api key for mbta api
+     * @param apiKey set the api key to make requests to the MBTA API
      */
     public void setApiKey(String apiKey){
         this.apiKey = apiKey;
     }
 
     /**
-     * @return arrayList with all of the Stops
+     * @return Hashmap with all of the Stop Objects and the id as String for the keys
      */
     public HashMap<String, Stop> getAllStops(){
         return stops;
     }
 
     /**
-     * @return hash map of all the routes
+     * @return hash map which contains the Route Object values and the id as String for the keys
      */
     public HashMap<String, Route> getAllRoutes(){
         return routes;
@@ -102,18 +102,33 @@ public class MBTA{
         }
     }
 
+    /**
+     * @param id the id of the trip
+     * @param trip trip Object to add in trips HashMap
+     */
     private void addTrip(String id, Trip trip){
         trips.put(id, trip);
     }
 
+    /**
+     * Clears the cached TrainArrival Objects in the trainArrival Array List
+     */
     private void clearStoredArrivals(){
         trainArrivals.clear();
     }
 
+    /**
+     * @param arrival takes in a TrainArrival Object
+     * adds the TrainArrival object to the trainArrivals Array List
+     */
     private void addArrival(TrainArrival arrival){
         trainArrivals.add(arrival);
     }
 
+    /**
+     * @param data takes the Json Data from the http request
+     * maps the Train Arrivals to an Array list of the Train Arrivals
+     */
     private void mapTrainArrivals(JsonNode data){
         for (JsonNode node :data){
             String id = node.get("id").asText();
@@ -126,15 +141,19 @@ public class MBTA{
 
     }
 
+    /**
+     * @param data takes in Json data from the http request
+     * maps the direction, the id, and the route the trip takes as a Route object
+     */
     private void mapTrips(JsonNode data){
         for (JsonNode node : data){
             String id = node.get("id").asText(); //Extract id
-            String name = node.get("attributes").get("headsign").asText(); //extarct name
-            String direction = node.get("attributes").get("direction_id").asText();
+            String name = node.get("attributes").get("headsign").asText(); //extracts the headsign that's displayed on the trains for example (E Heath Street)
+            String direction = node.get("attributes").get("direction_id").asText(); // direction id
             String route = node.get("relationships").get("route").get("data").get("id").asText();
 
             addTrip(id, new Trip(id, name, direction, routes.get(route)));
-            System.out.printf("%s %s%n", id, name);
+            //System.out.printf("%s %s%n", id, name);
 
         }
     }
@@ -149,9 +168,10 @@ public class MBTA{
             String id = node.get("id").asText(); //Extract id
             String name = node.get("attributes").get("long_name").asText(); //extarct name
             if(!id.equals("Mattapan")){
-                mapStops(httpRequest("https://api-v3.mbta.com/stops?filter[route]="+id, apiKey), id);
                 routes.put(id, new Route(id, name));
-                System.out.printf("%s %s%n", id, name);
+                mapStops(httpRequest("https://api-v3.mbta.com/stops?filter[route]="+id, apiKey), id);
+
+                System.out.printf("%s %s%n", id, name); //TODO: REMOVE BEFORE SUBMITTING
 
             }
 
@@ -171,7 +191,9 @@ public class MBTA{
             // 3. Extract "name" (inside the "attributes" object)
             String name = node.get("attributes").get("name").asText();
 
-            System.out.printf("%s %s%n", id, name);
+            //Print The stops to console
+
+            System.out.printf("%s %s%n", id, name); //TODO REMOVE BEFORE SUBMITTING
 
             addStop(id, new Stop(id, name));
             routes.get(routeId).addStopToRoute(stops.get(id));
