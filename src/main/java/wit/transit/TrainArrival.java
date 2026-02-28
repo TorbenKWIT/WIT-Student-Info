@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Train Arrival Class
  * arrival Time
  * Departure time
- * direction 1=
+ * direction 0=Outbound 1=Inbound
  */
 public class TrainArrival {
     String arrivalTimes;
@@ -30,7 +30,7 @@ public class TrainArrival {
     }
 
     /**
-     * @return
+     * @return the Departure time as a String
      */
     public String getDepartureTimes(){
         return departureTimes;

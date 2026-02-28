@@ -57,5 +57,11 @@ Example:
 Example:  
 `System.out.println(mbta.getTrainArrivals(stops.get("place-tapst"), mbta.getAllRoutes().get("Green-C")));`
 
-NOTE: when you  call the `getTrainArrivals()` method it will clear the items in the ArrayList before returning the new list this is due to limitations in how the MBTA API works
 
+
+NOTES:  
+- when you  call the `getTrainArrivals()` method it will clear the items in the ArrayList before returning the new list this is due to limitations in how the MBTA API works
+- The TrainArrival Object has a attribute called direction which is a string that has 2 possible values
+  
+  - 0 (train heading outbound)
+  - 1 (train heading inbound) 
