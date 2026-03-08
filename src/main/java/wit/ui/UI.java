@@ -183,26 +183,70 @@ public class UI extends JFrame {
 
         // Fetch Real-Time Arrivals
         submit.addActionListener(e -> {
-            String routeName = (String) lineBox.getSelectedItem();
-            String stopName = (String) stopBox.getSelectedItem();
+            String selectedRouteName = (String) lineBox.getSelectedItem();
+            String selectedStopName = (String) stopBox.getSelectedItem();
 
-            Route route = mbta.getAllRoutes().get(routeName); //
-            Stop stop = mbta.getAllStops().get(stopName); //
+            // Find Route by comparing names robustly
+            Route route = null;
+            for (Route r : mbta.getAllRoutes().values()) {
+                if (r.getName().equalsIgnoreCase(selectedRouteName) || r.getId().equalsIgnoreCase(selectedRouteName)) {
+                    route = r;
+                    break;
+                }
+            }
+
+            // Find Stop by comparing names robustly
+            Stop stop = null;
+            for (Stop s : mbta.getAllStops().values()) {
+                if (s.getName().equalsIgnoreCase(selectedStopName) || s.getId().equalsIgnoreCase(selectedStopName)) {
+                    stop = s;
+                    break;
+                }
+            }
 
             if (route != null && stop != null) {
-                // getTrainArrivals clears the internal list and returns new arrivals
-                ArrayList<TrainArrival> arrivals = mbta.getTrainArrivals(stop, route); //
+                // Fetch data (Note: this clears the internal list first)
+                ArrayList<TrainArrival> arrivals = mbta.getTrainArrivals(stop, route);
 
                 StringBuilder sb = new StringBuilder("REAL-TIME ARRIVALS:\n");
                 sb.append("----------------------------\n");
-                if (arrivals.isEmpty()) {
-                    sb.append("No upcoming trains found.");
+
+                if (arrivals == null || arrivals.isEmpty()) {
+                    sb.append("No upcoming trains found for this stop.");
                 } else {
                     for (TrainArrival a : arrivals) {
-                        sb.append("• ").append(a.toString()).append("\n"); //
+                        try {
+                            // Parse the ISO 8601 string (e.g., 2026-03-07T22:39:01-05:00)
+                            java.time.ZonedDateTime arrivalTime = java.time.ZonedDateTime.parse(a.getArrivalTime());
+                            java.time.ZonedDateTime now = java.time.ZonedDateTime.now();
+
+                            // Calculate the difference in minutes
+                            long minutesAway = java.time.Duration.between(now, arrivalTime).toMinutes();
+
+                            String display;
+                            if (minutesAway <= 0) {
+                                display = "Arriving now";
+                            } else if (minutesAway == 1) {
+                                display = "1 minute away";
+                            } else {
+                                display = minutesAway + " minutes away";
+                            }
+
+                            // Add the status
+                            sb.append("• ").append(display).append(" (").append(a.getDepartureTimes()).append(")\n");
+
+                        } catch (Exception ex) {
+                            // Fallback in case of parsing errors
+                            sb.append("• ").append(a.getArrivalTime()).append("\n");
+                        }
                     }
                 }
                 results.setText(sb.toString());
+            } else {
+                // Display exactly why it failed to help you debug
+                results.setText("Error: Data mapping failed.\n" +
+                        "Selected Route: " + selectedRouteName + " (Found: " + (route != null) + ")\n" +
+                        "Selected Stop: " + selectedStopName + " (Found: " + (stop != null) + ")");
             }
         });
 
