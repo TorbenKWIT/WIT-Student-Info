@@ -10,6 +10,8 @@ import java.awt.event.*;
 import java.awt.Desktop;
 import java.net.URI;
 import javax.swing.JOptionPane;
+
+import wit.Main;
 import wit.transit.MBTA;
 import wit.transit.Route;
 import wit.transit.Stop;
@@ -23,7 +25,6 @@ public class UI extends JFrame {
 
     // MBTA API Object
     private MBTA mbta;
-    private final String API_KEY = "310206e41bb7414ead99fbe3849953c4"; //
 
     // Theme Colors
     private final Color BACKGROUND_BLACK = new Color(25, 25, 25);
@@ -35,7 +36,7 @@ public class UI extends JFrame {
     public UI() {
         // Initialize MBTA and pull initial data
         mbta = new MBTA();
-        mbta.setApiKey(API_KEY); //
+        mbta.setApiKey(Main.API_KEY); //
         mbta.pullData(); // Maps API data to HashMaps
 
         setTitle("Student Information Hub");
@@ -378,7 +379,7 @@ public class UI extends JFrame {
         return back;
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new UI());
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> new UI());
+//    }
 }
