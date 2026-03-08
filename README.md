@@ -1,25 +1,25 @@
+# WIT Student HUB
 
-# UI (Tyler)
-
-# Web Scraping Backend(Danny)
-
-# MBTA Backend Information(Torben)
-
-This is the information on the Transit Backend 
 ## Get MBTA API Key
 1. go to https://api-v3.mbta.com/register and create a account
 2. once you have created an account go to https://api-v3.mbta.com/portal and click on request new key
 3. save the key somewhere safe 
 
 ## Build
-
 1. clone GitHub repo
-2. inside the directory the repo is in run the command
-	1. `mvn package` (this will build the jar file with the necessary dependency)
-3. move into the target directory
-4. run `java -jar transit-1.0-SNAPSHOT.jar`
+2. Get a MBTA API KEY-a
+3. once you have the mbta api key open the Main.java file and replace the API_KEY Variable value to the api key
+2. run the Main.Java file
 
 ## Usage
+The WIT Student hub brings campus information about the libary, fitness centers, and the dining hall all in one place as well as a MBTA Tracker tool that lets you see when the next train is arriving on amy stops on the Green Line
+
+## Possible Features that may be added in the future
+1. being able to select from the Blue, Orange, and Red lines
+2. booking library study rooms from within the app
+3. map of where the current train are located
+
+# Backend Information
 
 ### Create MBTA Object
 `MBTA mbta = new MBTA();`
@@ -29,7 +29,7 @@ This is the information on the Transit Backend
 
 `mbta.setApiKey(apiKey);`
 
-### MBTA Methods
+### MBTA Class Methods
 ### `pullData()`
 Description: Pulls updated data from the MBTA REST API maps the data to HashMaps you should run this when you make the MBTA Object 
 
