@@ -41,15 +41,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.15.2</version>
         </dependency>
-        <groupId>org.jsoup</groupId>
-    <artifactId>jsoup</artifactId>
-    <version>1.17.2</version>
-</dependency>
-    </dependencies>
-</project>            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.22.1</version>
-        </dependency>
+             
+     <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+         <dependency>
+             <groupId>org.jsoup</groupId>
+             <artifactId>jsoup</artifactId>
+             <version>1.22.1</version>
+         </dependency
     </dependencies>
 </project>
