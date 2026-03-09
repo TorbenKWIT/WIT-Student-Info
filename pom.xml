@@ -45,7 +45,8 @@
     <artifactId>jsoup</artifactId>
     <version>1.17.2</version>
 </dependency>
-            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+    </dependencies>
+</project>            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.22.1</version>
