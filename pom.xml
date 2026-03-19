@@ -28,8 +28,8 @@
                 </configuration>
             </plugin>
             </plugin>
-                 <group>org.codehaus.mojo</groupId
-                 <artifacted>exec-maven-plugin</artifactId
+                 <groupId>org.codehaus.mojo</groupId
+                 <artifactId>exec-maven-plugin</artifactId
                  <version>3.1.0</version>
                  <configuration>
                      <mainClass>wit.Main</mainClass
@@ -39,8 +39,8 @@
     </build>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
