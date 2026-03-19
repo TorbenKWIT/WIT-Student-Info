@@ -27,15 +27,13 @@
                     </archive>
                 </configuration>
             </plugin>
-            </plugin>
-                 <groupId>org.codehaus.mojo</groupId
-                 <artifactId>exec-maven-plugin</artifactId
+                 <groupId>org.codehaus.mojo</groupId>
+                 <artifactId>exec-maven-plugin</artifactId>
                  <version>3.1.0</version>
                  <configuration>
-                     <mainClass>wit.Main</mainClass
-                 </configuration>
-             </plugins>    
-        </plugins>
+                     <mainClass>wit.Main</mainClass>
+                 </configuration>  
+        </plugin>
     </build>
 
     <properties>
