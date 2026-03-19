@@ -1,7 +1,5 @@
 package wit.transit;
 
-import java.util.ArrayList;
-
 /**
  * Train Arrival Class
  * arrival Time

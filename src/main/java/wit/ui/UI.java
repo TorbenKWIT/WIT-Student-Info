@@ -1,22 +1,16 @@
 package wit.ui;
 
+import wit.Main;
+import wit.transit.*;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.Desktop;
-import java.net.URI;
 import javax.swing.JOptionPane;
-
-import wit.Main;
-import wit.transit.MBTA;
-import wit.transit.Route;
-import wit.transit.Stop;
-import wit.transit.TrainArrival;
-
 
 
 public class UI extends JFrame {
