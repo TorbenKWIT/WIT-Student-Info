@@ -34,7 +34,7 @@
                  <configuration>
                      <mainClass>wit.Main</mainClass
                  </configuration>
-             </plugin>    
+             </plugins>    
         </plugins>
     </build>
 
