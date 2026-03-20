@@ -258,14 +258,30 @@ public class UI extends JFrame {
     private JPanel createDiningScreen() {
         JPanel panel = createBasePanel();
         panel.add(createLabel("Dining Information", 20, true));
-        panel.add(Box.createVerticalStrut(30));
-
-        panel.add(createLabel("<html>Beatty Dining Hall: <font color='#00FF00'>OPEN</font></html>", 16, true));
-        panel.add(createLabel("Today: 7:00 AM - 9:00 PM", 14, false));
-        panel.add(createLabel("Weekly: Mon-Sun 7AM-9PM", 14, false));
         panel.add(Box.createVerticalStrut(20));
-        panel.add(createLabel("Menu: Grilled Chicken, Roasted Veggies", 14, false));
-
+        panel.add(createLabel("Beatty Dining Hall: ", 16, true));
+        panel.add(createLabel("Sunday: 10:00 AM - 8:30 PM", 14, false));
+        panel.add(createLabel("Monday-Thursday: 7:00 AM - 8:30 PM", 14, false));
+        panel.add(createLabel("Friday: 7:00 AM - 8:00 PM", 14, false));
+        panel.add(createLabel("Saturday: 10:00 AM - 8:00 PM", 14, false));
+        panel.add(Box.createVerticalStrut(30));
+        panel.add(createLabel("Menu:", 16, true));
+        panel.add(createLabel("Breakfast:", 14, true));
+        panel.add(createLabel("Grill: Scrambled Eggs, Home Fries, Cinnamon French Toast", 14, false));
+        panel.add(createLabel("Bakery: Bagels, Muffins, Fresh Bread", 14, false));
+        panel.add(createLabel("Showcase: Everything Omelet, Scrambled Tofu", 14, false));
+        panel.add(createLabel("Soup Station: Oatmeal, Grits", 14, false));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Lunch:", 14, true));
+        panel.add(createLabel("Entree: Szechuan Round Steak, House Fried Rice", 14, false));
+        panel.add(createLabel("Sal's Pizza: Philly Steak Pizza, Cheese Pizza, Pepperoni Pizza", 14, false));
+        panel.add(createLabel("Soup Station:Butternut Squash Chilli, Beef Veggie Soup", 14, false));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Dinner:", 14, true));
+        panel.add(createLabel("Entree: General Gau's Chicken, Steamed Broccoli, White Rice", 14, false));
+        panel.add(createLabel("Grill: Classic Hamburger, Chicken Nuggets, French Fries", 14, false));
+        panel.add(createLabel("Sal's Pizza: Philly Steak Pizza, Cheese Pizza, Pepperoni Pizza", 14, false));
+        panel.add(createLabel("Soup Station:Butternut Squash Chilli, Beef Veggie Soup", 14, false));
         panel.add(Box.createVerticalStrut(30));
         JButton btnLink = createButton("View Full Menu Online");
 
@@ -290,13 +306,17 @@ public class UI extends JFrame {
     // --- LIBRARY SECTION ---
     private JPanel createLibraryScreen() {
         JPanel panel = createBasePanel();
-        JLabel statusLabel = createLabel("<html>Status: <font color='#00FF00'>OPEN</font></html>", 16, true);
+        // JLabel statusLabel = createLabel("<html>Status: <font color='#00FF00'>OPEN</font></html>", 16, true);
         panel.add(createLabel("Library Information", 20, true));
-        panel.add(Box.createVerticalStrut(30));
-
-        panel.add(statusLabel);
-        panel.add(createLabel("Today's Hours: 8:00 AM - 12:00 AM", 14, false));
-        panel.add(Box.createVerticalStrut(30));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Sunday: 11:00 AM - 12:00 AM", 14, false));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Monday-Thursday: 7:00 AM - 12:00 AM", 14, false));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Friday: 7:00 AM - 6:00 PM", 14, false));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Saturday: 9:00 AM - 5:00 PM", 14, false));
+        panel.add(Box.createVerticalStrut(20));
 
         JButton btnLink = createButton("Open Study Room Booking");
         btnLink.addActionListener(e -> {
@@ -338,23 +358,17 @@ public class UI extends JFrame {
     private JPanel createFitnessScreen() {
         JPanel panel = createBasePanel();
         panel.add(createLabel("Fitness Center", 20, true));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Schumann Fitness Center:", 16, true));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Sunday: 11:00 AM - 9:00 PM", 14, false));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Monday-Thursday: 6:00 AM - 11:00 PM", 14, false));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Friday: 6:00 AM - 9:00 PM ", 14, false));
+        panel.add(Box.createVerticalStrut(20));
+        panel.add(createLabel("Saturday: 11:00 AM 7:00 PM", 14, false));
         panel.add(Box.createVerticalStrut(30));
-        panel.add(createLabel("<html>Schumann Fitness Center: <font color='#00FF00'>OPEN</font></html>", 16, true));
-        panel.add(createLabel("Today: 6:00 AM - 11:00 PM", 14, false));
-        panel.add(createLabel("Weekly: Mon-Fri 6AM-11PM, Sat-Sun 10AM-8PM", 14, false));
-        panel.add(createLabel("Capacity: 75%", 14, false));
-        panel.add(Box.createVerticalStrut(30));
-
-        panel.add(createLabel("<html>Tansey Basketball Court: <font color='#00FF00'>OPEN</font></html>", 16, true));
-        panel.add(createLabel("Today: 6:00 AM - 11:00 PM", 14, false));
-        panel.add(createLabel("Weekly: Mon-Fri 6AM-11PM, Sat-Sun 10AM-8PM", 14, false));
-        panel.add(createLabel("Capacity: 40%", 14, false));
-        panel.add(Box.createVerticalStrut(30));
-
-        panel.add(createLabel("<html>Tansey Gymnasium: <font color='#00FF00'>OPEN</font></html>", 16, true));
-        panel.add(createLabel("Today: 6:00 AM - 11:00 PM", 14, false));
-        panel.add(createLabel("Weekly: Mon-Fri 6AM-11PM, Sat-Sun 10AM-8PM", 14, false));
-        panel.add(createLabel("Capacity: 50%", 14, false));
 
         panel.add(Box.createVerticalGlue());
         panel.add(backToMenuBtn());
