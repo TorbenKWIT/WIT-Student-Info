@@ -7,9 +7,10 @@
 
 ## Build
 1. clone GitHub repo
-2. Get a MBTA API KEY-a
+2. Get a MBTA API KEY
 3. once you have the mbta api key open the Main.java file and replace the API_KEY Variable value to the api key
-2. run the Main.Java file
+2. open a terminal window and cd into project root directory (WIT-Student-Info) and run the command `mvm clean package` this will clear out the build dir and then compile the project and its dependencies.
+3. once it says `BUILD SUCCESS` run the command java -jar target/student-info-1.0-jar.jar
 
 ## Usage
 The WIT Student hub brings campus information about the libary, fitness centers, and the dining hall all in one place as well as a MBTA Tracker tool that lets you see when the next train is arriving on amy stops on the Green Line
