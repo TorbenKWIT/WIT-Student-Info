@@ -38,7 +38,13 @@ public class TrainArrival {
      * @return
      */
     public String getDirection(){
-        return direction;
+        if(direction.equals("0")){
+            return "Outbound";
+        } else if (direction.equals("1")) {
+            return "Inbound";
+        } else {
+            return  "NULL-DIR";
+        }
     }
 
     /**

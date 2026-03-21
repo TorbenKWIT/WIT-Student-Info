@@ -227,12 +227,13 @@ public class UI extends JFrame {
                                 display = minutesAway + " minutes away";
                             }
 
+
                             // Add the status
-                            sb.append("• ").append(display).append(" (").append(a.getDepartureTimes()).append(")\n");
+                            sb.append("• ").append(display).append(" |").append(a.getDirection()).append("| (").append(a.getDepartureTimes()).append(")\n");
 
                         } catch (Exception ex) {
                             // Fallback in case of parsing errors
-                            sb.append("• ").append(a.getArrivalTime()).append("\n");
+                            sb.append("• ").append(a.getArrivalTime()).append(" | ").append(a.getDirection()).append("\n");
                         }
                     }
                 }
