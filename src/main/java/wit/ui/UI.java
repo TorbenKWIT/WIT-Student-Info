@@ -310,7 +310,7 @@ public class UI extends JFrame {
         // JLabel statusLabel = createLabel("<html>Status: <font color='#00FF00'>OPEN</font></html>", 16, true);
         panel.add(createLabel("Library Information", 20, true));
         panel.add(Box.createVerticalStrut(20));
-        panel.add(createLabel("Sunday: 11:00 AM - 12:00 AM", 14, false));
+        panel.add(createLabel("Sunday: 8:00 AM - 12:00 AM", 14, false));
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Monday-Thursday: 7:00 AM - 12:00 AM", 14, false));
         panel.add(Box.createVerticalStrut(20));
